@@ -7,13 +7,20 @@
     "start": "node server.js",
     "dev": "node server.js"
   },
-  "keywords": ["football", "soccer", "live-scores", "statistics", "api"],
+  "keywords": [
+    "football",
+    "soccer",
+    "live-scores",
+    "statistics",
+    "api"
+  ],
   "author": "Methode Dumez",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
-    "node-fetch": "^2.6.9",
-    "cors": "^2.8.5"
+    "express": "^4.18.2",
+    "node-cache": "^5.1.2",
+    "node-fetch": "^2.6.9"
   }
 }

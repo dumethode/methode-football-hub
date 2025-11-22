@@ -2,6 +2,7 @@ const express = require('express');
 const fetch = require('node-fetch');
 const cors = require('cors');
 const path = require('path');
+const NodeCache = require('node-cache'); // Import Caching Library
 require('dotenv').config();
 
 const app = express();
@@ -9,18 +10,33 @@ const PORT = process.env.PORT || 3000;
 const API_KEY = process.env.FOOTBALL_API_KEY;
 const BASE_URL = 'https://api.football-data.org/v4';
 
+// Initialize Cache
+// stdTTL: 60 seconds (Data stays fresh for 1 minute)
+// checkperiod: 120 seconds (How often to delete old data)
+const cache = new NodeCache({ stdTTL: 60, checkperiod: 120 });
+
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-// Helper function for API calls with better error handling
+// Helper function for API calls with Caching 🚀
 async function callAPI(endpoint) {
+    const cacheKey = endpoint; // Use the URL as the ID for the data
+
+    // 1. Check Cache
+    const cachedData = cache.get(cacheKey);
+    if (cachedData) {
+        console.log(`⚡ Cache Hit: ${endpoint}`); // Served from Memory (Fast)
+        return cachedData;
+    }
+
+    // 2. If not in Cache, Fetch from API
     try {
-        console.log(`Calling API: ${BASE_URL}/${endpoint}`);
+        console.log(`🌐 API Call: ${BASE_URL}/${endpoint}`);
         const response = await fetch(`${BASE_URL}/${endpoint}`, {
             headers: { 
-                'X-Auth-Token': API_KEY
+                'X-Auth-Token': API_KEY 
             }
         });
         
@@ -30,13 +46,21 @@ async function callAPI(endpoint) {
         }
         
         const data = await response.json();
-        console.log(`API Success: ${endpoint}`);
+        
+        // 3. Save to Cache
+        console.log(`💾 Saving to Cache: ${endpoint}`);
+        cache.set(cacheKey, data);
+        
         return data;
     } catch (error) {
         console.error(`Error calling ${endpoint}:`, error.message);
         throw error;
     }
 }
+
+// ==========================================
+// API Routes
+// ==========================================
 
 // Get today's matches
 app.get('/api/matches/today', async (req, res) => {
@@ -81,27 +105,6 @@ app.get('/api/team/:teamId', async (req, res) => {
     }
 });
 
-// Get head-to-head for a specific match
-app.get('/api/match/:matchId', async (req, res) => {
-    try {
-        const { matchId } = req.params;
-        const data = await callAPI(`matches/${matchId}`);
-        res.json(data);
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch match data', message: error.message });
-    }
-});
-
-// Get all competitions
-app.get('/api/competitions', async (req, res) => {
-    try {
-        const data = await callAPI('competitions');
-        res.json(data);
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch competitions', message: error.message });
-    }
-});
-
 // Serve frontend
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -116,5 +119,5 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
     console.log(`⚽ Methode's Football Hub running on http://localhost:${PORT}`);
     console.log(`🔑 API Key loaded: ${API_KEY ? 'Yes ✅' : 'No ❌'}`);
-    console.log(`📊 Free Tier: 10 requests/minute`);
+    console.log(`⚡ Caching Enabled: 60 seconds TTL`);
 });
