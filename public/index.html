@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methode's Football Hub | Live Scores & Statistics</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo-link">
+                    <h1 class="logo">⚽ Methode's Football Hub</h1>
+                </a>
+                
+                <p class="tagline">
+                    <span class="tag-link" data-target="live">Live Scores</span> • 
+                    <span class="tag-link" data-target="standings">Statistics</span> • 
+                    <span class="tag-link" data-target="premier-league">Insights</span> • 
+                    <span class="tag-link" data-target="statistics">Predictions</span>
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="container">
+            <ul class="nav-list">
+                <li><button class="nav-btn active" data-tab="live">🔴 Live Matches</button></li>
+                <li><button class="nav-btn" data-tab="standings">🏆 All Standings</button></li>
+                <li><button class="nav-btn" data-tab="premier-league">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League</button></li>
+                <li><button class="nav-btn" data-tab="la-liga">🇪🇸 La Liga</button></li>
+                <li><button class="nav-btn" data-tab="statistics">📊 Predictions</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="container">
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Loading football data...</p>
+            </div>
+
+            <div id="error" class="error hidden">
+                <p>⚠️ Unable to load data. Please try again later.</p>
+                <p class="error-detail">Tip: The free API tier is limited to 10 requests/minute. Please wait a moment.</p>
+            </div>
+
+            <section id="live-tab" class="tab-content active">
+                <h2 class="section-title">🔴 Live & Upcoming Matches</h2>
+                <div class="info-banner">
+                    <p>📌 <strong>Note:</strong> Free tier provides delayed scores. Refresh for updates.</p>
+                </div>
+                <div id="live-matches" class="matches-grid"></div>
+            </section>
+
+            <section id="standings-tab" class="tab-content">
+                <h2 class="section-title">🏆 Global Standings</h2>
+                <div class="league-selector">
+                    <label for="league-select">Select Competition:</label>
+                    <select id="league-select">
+                        <option value="PL">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League (PL)</option>
+                        <option value="PD">🇪🇸 La Liga (PD)</option>
+                        <option value="CL">🇪🇺 UEFA Champions League (CL)</option>
+                        <option value="BL1">🇩🇪 Bundesliga (BL1)</option>
+                        <option value="SA">🇮🇹 Serie A (SA)</option>
+                        <option value="FL1">🇫🇷 Ligue 1 (FL1)</option>
+                        <option value="DED">🇳🇱 Eredivisie (DED)</option>
+                        <option value="ELC">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Championship (ELC)</option>
+                        <option value="PPL">🇵🇹 Primeira Liga (PPL)</option>
+                        <option value="BSA">🇧🇷 Série A Brazil (BSA)</option>
+                        <option value="WC">🌍 FIFA World Cup (WC)</option>
+                        <option value="EC">🇪🇺 European Championship (EC)</option>
+                    </select>
+                </div>
+                <div id="standings-table" class="standings-container"></div>
+            </section>
+
+            <section id="premier-league-tab" class="tab-content">
+                <div class="league-header liverpool-theme">
+                    <div class="league-logo">🏴󠁧󠁢󠁥󠁮󠁧󠁿</div>
+                    <div>
+                        <h2 class="section-title no-border">Premier League</h2>
+                        <p>Home of Liverpool FC 🔴</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title">Upcoming Fixtures</h3>
+                <div id="pl-matches" class="matches-grid"></div>
+                
+                <h3 class="subsection-title">League Table</h3>
+                <div id="pl-standings" class="standings-container"></div>
+            </section>
+
+            <section id="la-liga-tab" class="tab-content">
+                <div class="league-header madrid-theme">
+                    <div class="league-logo">🇪🇸</div>
+                    <div>
+                        <h2 class="section-title no-border">La Liga</h2>
+                        <p>Home of Real Madrid ⚪</p>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">Upcoming Fixtures</h3>
+                <div id="laliga-matches" class="matches-grid"></div>
+                
+                <h3 class="subsection-title">League Table</h3>
+                <div id="laliga-standings" class="standings-container"></div>
+            </section>
+
+            <section id="statistics-tab" class="tab-content">
+                <h2 class="section-title">📊 Analytics & Predictions</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3 class="stat-title">🔮 Match Prediction AI</h3>
+                        <p class="stat-desc">Select two teams to predict the winner based on league performance.</p>
+                        <p class="stat-desc" style="font-size: 0.8rem; color: #666;"><em>Note: Teams from all loaded leagues are available here.</em></p>
+                        
+                        <div class="prediction-controls">
+                            <select id="team1-select" class="team-select">
+                                <option value="">Select Home Team</option>
+                            </select>
+                            <span class="vs-badge">VS</span>
+                            <select id="team2-select" class="team-select">
+                                <option value="">Select Away Team</option>
+                            </select>
+                        </div>
+                        <button id="predict-btn" class="action-btn">Analyze Match</button>
+                        
+                        <div id="prediction-result" class="prediction-result hidden"></div>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3 class="stat-title">📈 How it works</h3>
+                        <div class="insights-content">
+                            <p>Our algorithm analyzes:</p>
+                            <ul>
+                                <li>Current League Points (60% weight)</li>
+                                <li>Goal Difference (35% weight)</li>
+                                <li>Home Advantage (5% weight)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Tip:</strong> Go to the "All Standings" tab and select a league (like Brazil or Bundesliga) to load those teams into the prediction engine!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section brand-section">
+                <h3>⚽ Methode's Football Hub</h3>
+                <p>Your ultimate destination for live match statistics, league standings, and AI-powered match predictions.</p>
+                <div class="tech-stack">
+                    <span><i class="fab fa-js"></i> Node.js</span>
+                    <span><i class="fas fa-database"></i> API</span>
+                    <span><i class="fab fa-html5"></i> HTML5</span>
+                </div>
+            </div>
+
+            <div class="footer-section contact-section">
+                <h3>Connect with Developer</h3>
+                <p class="username">@dumethode</p>
+                <div class="social-links">
+                    <a href="https://github.com/dumethode" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://instagram.com/dumethode" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com/in/dumethode" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="mailto:duhujubumwe@icloud.com" title="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Methode's Football Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

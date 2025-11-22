@@ -1,0 +1,240 @@
+/* ============================================
+   Methode's Football Hub - Stylesheet
+   FIFA Colors + Montserrat Font
+   ============================================ */
+
+:root {
+    --fifa-blue: #326295;
+    --fifa-dark-blue: #1e3a5f;
+    --fifa-gold: #B7950B;
+    --fifa-light-gold: #d4af37;
+    --liverpool-red: #c8102e;
+    --madrid-white: #FEBE10;
+    --white: #ffffff;
+    --light-gray: #f5f5f5;
+    --gray: #e0e0e0;
+    --dark-gray: #666666;
+    --text-dark: #1a1a1a;
+    --success-green: #27ae60;
+    --danger-red: #e74c3c;
+}
+
+/* Reset & Base */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, var(--light-gray) 0%, #e8eef5 100%);
+    color: var(--text-dark);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, var(--fifa-blue) 0%, var(--fifa-dark-blue) 100%);
+    color: var(--white);
+    padding: 30px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.logo-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+.logo-link:hover {
+    transform: scale(1.02);
+}
+.logo { font-weight: 800; font-size: 2.2rem; }
+
+.tagline { 
+    font-weight: 300; 
+    letter-spacing: 1px; 
+    opacity: 0.9; 
+    margin-top: 5px;
+}
+.tag-link {
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+}
+.tag-link:hover {
+    color: var(--fifa-gold);
+    border-bottom-color: var(--fifa-gold);
+    opacity: 1;
+}
+
+/* Navigation */
+.nav { background: var(--white); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+.nav-list { display: flex; justify-content: center; padding: 15px 0; gap: 10px; flex-wrap: wrap; list-style: none; }
+.nav-btn {
+    background: transparent;
+    border: 2px solid transparent;
+    padding: 10px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    color: var(--dark-gray);
+}
+.nav-btn:hover { background: var(--light-gray); color: var(--fifa-blue); }
+.nav-btn.active {
+    background: var(--fifa-blue);
+    color: var(--white);
+    box-shadow: 0 4px 10px rgba(50, 98, 149, 0.3);
+}
+
+/* Layout */
+.main { padding: 40px 0; flex: 1; }
+.section-title {
+    color: var(--fifa-dark-blue);
+    border-bottom: 3px solid var(--fifa-gold);
+    display: inline-block;
+    padding-bottom: 5px;
+    margin-bottom: 30px;
+}
+.section-title.no-border { border-bottom: none; margin-bottom: 5px; color: var(--white); }
+.subsection-title { margin: 30px 0 15px; color: var(--fifa-blue); }
+
+.tab-content { display: none; animation: fadeIn 0.5s ease; }
+.tab-content.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* League Headers */
+.league-header {
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: var(--white);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.league-logo { font-size: 4rem; }
+.liverpool-theme { background: linear-gradient(135deg, var(--liverpool-red), #8a0b20); }
+.madrid-theme { background: linear-gradient(135deg, var(--fifa-blue), var(--fifa-dark-blue)); border: 2px solid var(--madrid-white); }
+
+/* Matches Grid */
+.matches-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; }
+.match-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+    border-left: 5px solid var(--gray);
+}
+.match-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+.match-card.live { border-left-color: var(--danger-red); }
+.match-card.finished { border-left-color: var(--fifa-blue); }
+.match-card.scheduled { border-left-color: var(--success-green); }
+
+.match-header { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--dark-gray); margin-bottom: 15px; }
+.status-badge { padding: 2px 8px; border-radius: 10px; font-weight: 700; font-size: 0.7rem; text-transform: uppercase; }
+.status-live { background: var(--danger-red); color: white; animation: pulse 2s infinite; }
+.status-scheduled { background: var(--success-green); color: white; }
+.status-finished { background: var(--dark-gray); color: white; }
+
+.teams-container { display: flex; flex-direction: column; gap: 10px; }
+.team-row { display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1.1rem; }
+.team-name { display: flex; align-items: center; gap: 10px; }
+.team-crest { width: 30px; height: 30px; object-fit: contain; }
+.score { font-weight: 800; font-size: 1.2rem; color: var(--fifa-dark-blue); }
+
+/* Standings */
+.standings-container { overflow-x: auto; background: var(--white); border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+.standings-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+.standings-table th { background: var(--light-gray); padding: 15px; text-align: left; font-size: 0.85rem; color: var(--dark-gray); }
+.standings-table td { padding: 12px 15px; border-bottom: 1px solid var(--light-gray); font-size: 0.95rem; }
+.pos-num { font-weight: 700; color: var(--fifa-gold); width: 30px; display: inline-block; }
+.team-cell { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+
+/* Statistics & Predictions */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.stat-card { background: var(--white); padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+.stat-title { color: var(--fifa-blue); margin-bottom: 15px; font-size: 1.2rem; }
+.prediction-controls { display: flex; flex-direction: column; gap: 15px; margin: 20px 0; }
+.team-select { padding: 12px; border: 2px solid var(--gray); border-radius: 8px; font-family: inherit; font-size: 1rem; }
+.vs-badge { text-align: center; font-weight: 800; color: var(--fifa-gold); }
+.action-btn {
+    background: var(--fifa-blue); color: var(--white); border: none; padding: 15px;
+    border-radius: 8px; font-weight: 700; cursor: pointer; transition: background 0.3s;
+}
+.action-btn:hover { background: var(--fifa-dark-blue); }
+.prediction-result { margin-top: 20px; padding: 15px; background: var(--light-gray); border-radius: 8px; border-left: 4px solid var(--fifa-gold); }
+.pred-winner { font-size: 1.2rem; font-weight: 800; color: var(--fifa-dark-blue); display: block; margin-bottom: 5px; }
+
+/* Footer Design */
+.footer {
+    background: var(--fifa-dark-blue);
+    color: var(--white);
+    padding: 50px 0 20px;
+    margin-top: auto;
+}
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+.footer-section { flex: 1; min-width: 250px; }
+.footer-section h3 { color: var(--fifa-gold); margin-bottom: 20px; font-size: 1.2rem; }
+.footer-section p { margin-bottom: 15px; opacity: 0.9; }
+.tech-stack span {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    margin-right: 5px;
+}
+.username { font-size: 1.2rem; font-weight: 700; color: var(--white); }
+.social-links { display: flex; gap: 15px; margin-top: 15px; }
+.social-links a {
+    width: 40px; height: 40px;
+    background: rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    color: var(--white);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+.social-links a:hover {
+    background: var(--fifa-gold);
+    color: var(--fifa-dark-blue);
+    transform: translateY(-3px);
+    border-color: var(--fifa-gold);
+}
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* Utilities */
+.loading, .error { text-align: center; padding: 40px; }
+.spinner { width: 40px; height: 40px; border: 4px solid var(--gray); border-top-color: var(--fifa-blue); border-radius: 50%; margin: 0 auto 15px; animation: spin 1s infinite linear; }
+.hidden { display: none !important; }
+.info-banner { background: #fff3cd; color: #856404; padding: 10px 15px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9rem; border-left: 4px solid #ffeeba; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-list { flex-direction: column; }
+    .league-header { flex-direction: column; text-align: center; }
+    .matches-grid { grid-template-columns: 1fr; }
+    .footer-content { flex-direction: column; text-align: center; }
+    .social-links { justify-content: center; }
+}
