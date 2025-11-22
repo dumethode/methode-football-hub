@@ -24,6 +24,11 @@ const elements = {
 // Application Init
 document.addEventListener('DOMContentLoaded', () => {
     initializeNavigation();
+    
+    // FIX: Load live matches immediately on startup
+    loadLiveMatches(); 
+    
+    // Background task: Pre-load teams for predictions
     loadInitialData();
     setupPredictionEngine();
 });
@@ -40,7 +45,7 @@ function initializeNavigation() {
         });
     });
 
-    // 2. Header Tagline Links (New Feature)
+    // 2. Header Tagline Links
     const tagLinks = document.querySelectorAll('.tag-link');
     tagLinks.forEach(link => {
         link.addEventListener('click', () => {
@@ -82,8 +87,11 @@ function switchTab(tab) {
 
 async function loadInitialData() {
     // Pre-load Premier League and La Liga for predictions
-    await loadStandings('PL', false); 
-    setTimeout(() => loadStandings('PD', false), 1000);
+    // Delayed slightly to ensure Live Matches load first without rate limiting
+    setTimeout(async () => {
+        await loadStandings('PL', false); 
+        setTimeout(() => loadStandings('PD', false), 1500);
+    }, 1000);
 }
 
 // ============================================
@@ -120,7 +128,6 @@ function updateTeamSelects(standingsData) {
 
     let newTeamsAdded = false;
 
-    // Add teams to state if not already there
     table.forEach(row => {
         if (!state.teams.find(t => t.id === row.team.id)) {
             state.teams.push({
@@ -136,10 +143,8 @@ function updateTeamSelects(standingsData) {
     });
 
     if (newTeamsAdded) {
-        // Sort alphabetically
         state.teams.sort((a, b) => a.name.localeCompare(b.name));
 
-        // Populate Dropdowns - Keep currently selected value if possible
         const val1 = elements.team1Select.value;
         const val2 = elements.team2Select.value;
 
@@ -171,7 +176,6 @@ function calculatePrediction() {
     const t1 = state.teams.find(t => t.id === id1);
     const t2 = state.teams.find(t => t.id === id2);
 
-    // Algorithm: Points Weight (60%) + Goal Difference (35%) + Home Advantage (5%)
     const score1 = (t1.points * 0.6) + (t1.gd * 0.35) + 5; 
     const score2 = (t2.points * 0.6) + (t2.gd * 0.35);
 
