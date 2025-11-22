@@ -90,8 +90,8 @@ The Load Balancer uses **HAProxy** to split traffic evenly between Web-01 and We
     backend football-backend
         mode http
         balance roundrobin
-        server web-01 18.206.255.103:80 check
-        server web-02 18.233.156.110:80 check
+        server web-01 18.2............. check
+        server web-02 18.2............. check
     ```
 
 ---
