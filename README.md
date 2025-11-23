@@ -4,7 +4,7 @@
 A distributed web application that transforms raw football data into actionable intelligence. Designed specifically for **sports journalists** and **stakers** who require real-time data, statistical analysis, and predictive modeling to make informed decisions.
 
 [![Demo Video](https://img.shields.io/badge/📺%20Watch-Demo%20Video-red?style=for-the-badge&logo=youtube)](https://youtu.be/X--vJEYpgfE)
-[![Status](https://img.shields.io/badge/Status-Deployed-success?style=for-the-badge)](wwww.dumethode.tech)
+[![Status](https://img.shields.io/badge/Status-Deployed-success?style=for-the-badge)](18.206.255.103)
 
 ---
 
