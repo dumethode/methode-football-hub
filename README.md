@@ -1,4 +1,4 @@
-# ⚽ Methode's Football Hub
+# Methode's Football Hub
 
 **Football Match Intelligence Platform**
 A distributed web application that transforms raw football data into actionable intelligence. Designed specifically for **sports journalists** and **stakers** who require real-time data, statistical analysis, and predictive modeling to make informed decisions.
@@ -8,19 +8,19 @@ A distributed web application that transforms raw football data into actionable 
 
 ---
 
-## 🎯 Practical Purpose & Value
+## Practical Purpose & Value
 * **For Stakers:** The **AI Prediction Engine** calculates winning probabilities based on weighted metrics (Form, Goal Difference, Home Advantage), removing emotional bias from betting decisions.
 * **For Journalists:** **Server-Side Caching** ensures instant access to league statistics even during high-traffic API periods, bypassing standard rate limits.
 
-## 🌟 Key Features (User Interaction)
-* **🔮 AI Prediction Engine:** Users can select any two teams from supported leagues to simulate a match outcome based on historical data.
-* **⚡ High-Performance Caching:** Implemented server-side caching (TTL 60s) to reduce load times and handle API rate limits gracefully.
-* **🎨 Dynamic Theming:** Context-aware UI that adapts visual themes based on the selected league (e.g., Liverpool Red for Premier League, Real Madrid Gold for La Liga).
-* **📊 Interactive Standings:** Users can filter standings by league and view detailed form guides.
+## Key Features (User Interaction)
+* **AI Prediction Engine:** Users can select any two teams from supported leagues to simulate a match outcome based on historical data.
+* **High-Performance Caching:** Implemented server-side caching (TTL 60s) to reduce load times and handle API rate limits gracefully.
+* **Dynamic Theming:** Context-aware UI that adapts visual themes based on the selected league (e.g., Liverpool Red for Premier League, Real Madrid Gold for La Liga).
+* **Interactive Standings:** Users can filter standings by league and view detailed form guides.
 
 ---
 
-## 🛠️ Technical Architecture
+## Technical Architecture
 
 The application utilizes a **3-Tier Distributed Architecture** for high availability:
 
@@ -38,7 +38,7 @@ The application utilizes a **3-Tier Distributed Architecture** for high availabi
 
 ---
 
-## 🚀 Installation & Setup
+## Installation & Setup
 
 ### 1. Local Development
 ```bash
@@ -86,26 +86,26 @@ backend football-backend
 
 ---
 
-## 📢 Credits & Attribution
+## Credits & Attribution
 
 This project strictly adheres to attribution requirements for external resources:
 
 ### 1. External API
 * **[Football-Data.org](https://www.football-data.org/):**
     * Used for fetching live scores, fixtures, and team statistics.
-    * *Attribution:* Clearly cited in the application footer and this documentation.
+
 
 ### 2. Libraries & Resources
 * **Node-Cache:** Used for implementing the caching layer to optimize performance.
 * **Google Fonts:** [Montserrat](https://fonts.google.com/specimen/Montserrat) typeface.
 * **FontAwesome:** Used for UI icons.
 
-## 👤 Author
+## Author
 
-**Methode Dumez**
+**Methode Duhujubumwe**
 * **GitHub:** [@dumethode](https://github.com/dumethode)
 * **Email:** duhujubumwe@icloud.com
 * **Instagram:** [@dumethode](https://instagram.com/dumethode)
 
 ---
-*Submitted for Web Development Assignment - 2025*
+*Submitted for Web Infrastructure Assignment - 2025*
